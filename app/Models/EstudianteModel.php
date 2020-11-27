@@ -16,9 +16,9 @@ class EstudianteModel extends Model
     protected $validationRules  = [
         'nombre'        => 'required|alpha_space|min_length[3]|max_leght[75]',
         'apellido'      => 'required|alpha_space|min_length[3]|max_leght[75]',
-        'dui'           => 'required|alpha_space|min_length[10]|max_leght[10]',
+        'dui'           => 'required|alpha_numeric_space|min_length[10]|max_leght[10]',
         'genero'        => 'required|alpha_space|min_length[1]|max_leght[1]',
-        'carnet'        => 'required|alpha_space|min_length[9]|max_leght[9]',
+        'carnet'        => 'required|alpha_numeric_space|min_length[9]|max_leght[9]',
     ];   
     protected $skipValidation = false;
 

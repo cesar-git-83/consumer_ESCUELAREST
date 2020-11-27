@@ -17,5 +17,19 @@ class Estudiante extends ResourceController
 		return $this->respond($estudiante);
 	}
 
-	
+	public function create()
+    {
+        try {
+            $estudiante = $this->request->getJSON();
+            if($this->model->insert($estudiante)):
+                $estudiante->id = $this->model->insertID();
+                return $this->respondCreated($estudiante);
+            else:
+                return $this->failValidationError($this->model->validation->listErrors());
+            endif;
+        } catch (\Exception $e) {
+           
+            return $this->failserverError('Ha ocurrido un error en el servidor');
+        }
+    }
 }

@@ -34,8 +34,11 @@ $routes->get('/', 'Home::index');
 
 $routes->group('api',['namespace' => 'App\Controllers\API'],function ($routes){
 	$routes -> get('estudiante', 'Estudiante::index');
+	$routes -> post('estudiante/create', 'Estudiante::create');
 	$routes -> get('profesor', 'Profesor::index');
+	$routes -> post('profesor/create', 'Profesor::create');
 	$routes -> get('grado', 'Grado::index');
+	$routes -> post('grado/create', 'Grado::create');
 	
 });
 
