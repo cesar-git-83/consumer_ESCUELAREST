@@ -9,7 +9,7 @@ class EstudianteModel extends Model
 
     protected $returnType       ='array';
 
-    protected $allowedFields    = ['nombre','apellido','dui','genero','carnet'];
+    protected $allowedFields    = ['nombre','apellido','dui','genero','carnet','grado_id'];
     protected $useTimestamps    = true;
     protected $createdFields    = 'create_at';
     protected $updatedFields    = 'update_at';
@@ -19,6 +19,7 @@ class EstudianteModel extends Model
         'dui'           => 'required|alpha_numeric_space|min_length[10]|max_leght[10]',
         'genero'        => 'required|alpha_space|min_length[1]|max_leght[1]',
         'carnet'        => 'required|alpha_numeric_space|min_length[9]|max_leght[9]',
+        'grado_id'      => 'required|integer|is_valid_grado',
     ];   
     protected $skipValidation = false;
 

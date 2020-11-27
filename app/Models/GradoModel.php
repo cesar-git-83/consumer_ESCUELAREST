@@ -9,14 +9,14 @@ class GradoModel extends Model
 
     protected $returnType       ='array';
 
-    protected $allowedFields    = ['grado','seccion'];
+    protected $allowedFields    = ['grado','seccion','profesor_id'];
     protected $useTimestamps    = true;
     protected $createdFields    = 'create_at';
     protected $updatedFields    = 'update_at';
     protected $validationRules  = [
-        'nombre'        => 'required|alpha_space|min_length[3]|max_leght[60]',
-        'apellido'      => 'required|alpha_space|min_length[2]|max_leght[2]',
-
+        'grado'        => 'required|alpha_space|min_length[3]|max_leght[60]',
+        'seccion'      => 'required|alpha_space|min_length[2]|max_leght[2]',
+        'profesor_id'  => 'required|integer|is_valid_profesor',
     ];   
     protected $skipValidation = false;
 

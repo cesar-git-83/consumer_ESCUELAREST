@@ -32,4 +32,76 @@ class Estudiante extends ResourceController
             return $this->failserverError('Ha ocurrido un error en el servidor');
         }
     }
+
+    public function edit($id = null)
+	{
+        try {
+            if($id == null)
+            return $this->failValidationError('No se ha pasado un Id valido');
+
+            $estudiante = $this->model->find($id);
+
+            if($estudiante == null)
+            return $this->failNotFound('No se ha encontrado el estudiante con el id:'.$id);
+
+            return $this->respond($estudiante);
+        } catch (\Exception $e) {
+           
+            return $this->failserverError('Ha ocurrido un error en el servidor');
+        }
+        
+    }
+    
+    public function update($id = null)
+	{
+        try {
+            if($id == null)
+            return $this->failValidationError('No se ha pasado un Id valido');
+
+            $estudianteVerificado = $this->model->find($id);
+
+            if($estudianteVerificado == null)
+            return $this->failNotFound('No se ha encontrado el estudiante con el id:'.$id);
+
+            $estudiante = $this->request->getJSON();
+
+            if($this->model->update($id, $estudiante)):
+               $estudiante->id = $id;
+                return $this->respondUpdated($estudiante);
+            else:
+                return $this->failValidationError($this->model->validation->listErrors());
+            endif;
+
+        } catch (\Exception $e) {
+           
+            return $this->failserverError('Ha ocurrido un error en el servidor');
+        }
+        
+    }
+    
+    public function delete($id = null)
+	{
+        try {
+            if($id == null)
+            return $this->failValidationError('No se ha pasado un Id valido');
+
+            $estudianteVerificado = $this->model->find($id);
+
+            if($estudianteVerificado == null)
+            return $this->failNotFound('No se ha encontrado el estudiante con el id:'.$id);
+
+            
+            if($this->model->delete($id)):
+            
+                return $this->respondDeleted($estudianteVerificado);
+            else:
+                return $this->failserverError('No se ha podido eliminar el dato');
+            endif;
+
+        } catch (\Exception $e) {
+           
+            return $this->failserverError('Ha ocurrido un error en el servidor');
+        }
+        
+	}
 }
