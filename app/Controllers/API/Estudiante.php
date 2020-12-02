@@ -43,6 +43,9 @@ class Estudiante extends ResourceController
 
             if($estudiante == null)
             return $this->failNotFound('No se ha encontrado el estudiante con el id:'.$id);
+            
+            $profesorModel = new ProfesorModel();
+            $estudiante["profesor"] = $profesorModel->where('estudiante_id',$estudiante['id'])->findAll();
 
             return $this->respond($estudiante);
         } catch (\Exception $e) {
